@@ -6,13 +6,13 @@
 #         self.right = right
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-
-        def helper(start,minn = float('-inf'),maxx = float('inf')):
+   
+        def helper(start,minn,maxx):
             if not start:
                 return True
             
-            left = minn < start.val < maxx and helper(start.left,minn,start.val)
-            right = minn < start.val < maxx and helper(start.right,start.val,maxx)
-            return left and right
+            valid = minn < start.val < maxx
 
-        return helper(root)
+            return valid and helper(start.left,minn,start.val) and helper(start.right,start.val,maxx)
+
+        return helper(root,float('-inf'),float('inf'))
